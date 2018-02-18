@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import style from './style';
 
-import Map, { GoogleApiWrapper, Marker, InfoWindow, Listing } from 'google-maps-react';
+import Map, { GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 const { GOOGLE_API_KEY } = require('../../../config');
 
 class PlacesContainer extends Component {
@@ -13,12 +13,12 @@ class PlacesContainer extends Component {
       selectedPlace: {},
       places: [],
       lat: null,
-      lng: null,
+      lng: null
     }
-    this.onMarkerClick = this.onMarkerClick.bind(this);
-    this.onMapClicked = this.onMapClicked.bind(this);
     this.geolocatonSuccess = this.geolocatonSuccess.bind(this);
     navigator.geolocation.getCurrentPosition(this.geolocatonSuccess);
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onMapClicked = this.onMapClicked.bind(this);
     this.fetchPlaces = this.fetchPlaces.bind(this);
     this.update = this.update.bind(this);
   }
@@ -50,7 +50,7 @@ class PlacesContainer extends Component {
   fetchPlaces(mapProps, map) {
     const {google} = mapProps;
     console.log(mapProps);
-    let curr = new google.maps.LatLng(this.state.lat,this.state.lng);
+    let curr = new google.maps.LatLng(mapProps.center.lat,mapProps.center.lng);
     let request = {
       location: curr,
       radius: '2000',
